@@ -1,0 +1,27 @@
+# Node modules (dependencies)
+node_modules/
+
+# SQLite database and related files
+wishlist.db
+wishlist.db-journal
+
+# Environment variables
+.env
+
+# Logs and debugging files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sessions and cache
+*.log
+*.pid
+*.seed
+*.dump
+.cache/
+.vscode/
+.DS_Store
+
+# Ignore Render/Deployment specific files
+render.yaml
+
