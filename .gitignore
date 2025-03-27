@@ -21,6 +21,7 @@ yarn-error.log*
 .cache/
 .vscode/
 .DS_Store
+session_cookie.txt
 
 # Ignore Render/Deployment specific files
 render.yaml

@@ -1,0 +1,45 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - master  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22  
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start the server in the background
+        run: |
+          nohup node app.js &
+          sleep 10  # Wait for server to start
+
+      - name: Run smoke tests
+        run: bash testing/smoke-test.sh
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test  # Deploy job will run only if the test job is successful
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Render
+        run: |
+          # Replace this with your deployment steps to Render
+          curl -X POST https://api.render.com/deploy/srv-cvi9nbt6ubrc73800djg \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+
